@@ -91,3 +91,25 @@ int equal2(COLUMN *col, int value){
     }
     return res;
 }
+COLUMN *create_column(ENUM_TYPE type, char *title)
+{
+    COLUMN *col = (COLUMN*)malloc(sizeof(COLUMN));
+    col -> title = title;
+    col -> size = 0;
+    col -> max_size = 0;
+    col -> column_type; //jsp cmt faire pr cette ligne
+    col -> data = 0;
+    col -> index = 0;
+
+    return colonne;
+}
+
+int insert_value(COLUMN *col, void *value)
+{
+    if (col -> size == col -> max_size)
+    {
+        col->data = malloc(REALOC_SIZE*sizeof(int));
+        col->lSize += REALOC_SIZE;
+        //je continuerai plus tard, faut que je dors 
+    }
+}
