@@ -10,6 +10,12 @@ CDATAFRAME *create_cdf(){
     return cdf;
 }
 
+enum enum_type
+{
+    NULLVAL = 1 , UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
+};
+typedef enum enum_type ENUM_TYPE;
+
 int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column){
     if(cdataframe->lSize == cdataframe->pSize){
         cdataframe->list_col = malloc(16*sizeof(COLUMN));
