@@ -124,7 +124,9 @@ int insert_value2(COLUMN *col, void *value)
 
 void delete_column2(COLUMN **col)
 {
-    free(col->data);
+    for(int i=0; i< *col->size; i++){
+        free(*col->data[i]);
+    }
     free(col);
 }
 
@@ -134,6 +136,10 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size)
     {
         case INT :
         snprintf(str, size, "%d", *((int*)col->data[i]));
+        break;
+
+        case UINT :
+        snprintf(str, size, "%d", *((unsigned int*)col->data[i]));
         break;
 
         case CHAR :
@@ -149,12 +155,11 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size)
         break;
 
         case STRING:
-        snprintf(str, size, "%s", **((char**)col->data[i]));
+        snprintf(str, size, "%s", ((char*)col->data[i]));
         break;
 
         case STRUCTURE:
-        snprintf(str, size, "%s", ((void*)col->data[i]));
+        snprintf(str, size, "%s", ((struct*)col->data[i]));
         break;
     }
-    printf("%s",*str);
 }
