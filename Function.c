@@ -186,7 +186,14 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size)
         break;
 
         case STRUCTURE:
-        snprintf(str, size, "%s", ((struct*)col->data[i]));
+        snprintf(str, size, "%s", ((int*)col->data[i]));
         break;
     }
 }
+
+void print_col(COLUMN* col){
+    for (int i = 0; i < col->size; ++i) {
+        printf("[%d] %d\n",i,col->data[i]);
+    }
+}
+
