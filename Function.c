@@ -109,7 +109,7 @@ int insert_value(COLUMN *col, void *value)
     if (col -> size == col -> max_size)
     {
         col->data = malloc(REALOC_SIZE*sizeof(int));
-        col->lSize += REALOC_SIZE;
+        col->size += REALOC_SIZE;
          
     }
 }
