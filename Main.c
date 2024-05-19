@@ -29,7 +29,6 @@ int main(){
     printf("%d\n", equal2(col,3));
 
     printf("%d,%d\n",col->pSize, col->lSize);
-
     */
 
     COLUMN *col = create_column(CHAR, "My Col");

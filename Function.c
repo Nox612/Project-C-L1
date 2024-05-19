@@ -107,26 +107,21 @@ COLUMN *create_column2(ENUM_TYPE type, char *title)
 
 int insert_value2(COLUMN *col, void *value)
 {
-    if (col -> lSize == col -> pSize)
+    if (col->size == col -> max_size)
     {
         col->data = malloc(REALOC_SIZE*sizeof(int));
         col->max_size += REALOC_SIZE;
     }
-    
-    if (value == NULL)
-    {
-        *value = NULL;
-        col -> data[col->pSize] = *value;
-    }
     if (col->data!=NULL)
         {
-            col->data[col->pSize] = *value;
-            col->pSize += 1;
+            col->data[col->max_size] = value;
+            col->size += 1;
             return 1;
         }
 
     return 0;
 }
+
 void delete_column2(COLUMN **col)
 {
     free(col->data);
@@ -154,19 +149,12 @@ void convert_value(COLUMN *col, unsigned long long int i, char *str, int size)
         break;
 
         case STRING:
-        snprintf(str, size, "%s", ((char)col->data[i]));
+        snprintf(str, size, "%s", **((char**)col->data[i]));
         break;
 
         case STRUCTURE:
         snprintf(str, size, "%s", ((void*)col->data[i]));
         break;
     }
-    if (col->data!=NULL)
-    {
-        col->data[col->size] = value;
-        col->size += 1;
-        return 1;
-    }
-    return 0;
+    printf("%s",*str);
 }
-

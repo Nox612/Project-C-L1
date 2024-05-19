@@ -32,6 +32,7 @@ int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column);*/
 // prj part 2
 
 //  5.1
+
 enum enum_type
 {
     NULLVAL = 1 , UINT, INT, CHAR, FLOAT, DOUBLE, STRING, STRUCTURE
