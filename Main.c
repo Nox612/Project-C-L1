@@ -32,5 +32,11 @@ int main(){
 
     */
 
+    COLUMN *col = create_column(CHAR, "My Col");
+    char a = 'A', c = 'C';
+    insert_value(col, &a);
+    insert_value(col, NULL);
+    insert_value(col, &c);
+
     return 0;
 }

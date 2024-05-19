@@ -2,7 +2,7 @@
 #include "Header.h"
 #include "malloc.h"
 
-CDATAFRAME *create_cdf(){
+/*CDATAFRAME *create_cdf(){
     CDATAFRAME *cdf = (CDATAFRAME*)malloc(sizeof(CDATAFRAME));
     cdf->lSize = 0;
     cdf->pSize = 0;
@@ -19,5 +19,5 @@ int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column){
         return 0;
     }
     return 1;
-}
+}*/
 

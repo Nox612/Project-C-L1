@@ -4,16 +4,16 @@
 
 #define REALOC_SIZE 256
 
-COLUMN *create_column(char *title){
+/*COLUMN *create_column1(char *title){
     COLUMN *col = (COLUMN*)malloc(sizeof(COLUMN));
     col->lSize = 0;
     col->pSize = 0;
     col->title = title;
     col->data = 0;
     return col;
-}
+}*/
 
-int insert_value(COLUMN *col, int value){
+/*int insert_value1(COLUMN *col, int value){
     if (col->lSize == col->pSize)
     {
         col->data = malloc(REALOC_SIZE*sizeof(int));
@@ -90,18 +90,19 @@ int equal2(COLUMN *col, int value){
         }
     }
     return res;
-}
+}*/
+
 COLUMN *create_column(ENUM_TYPE type, char *title)
 {
     COLUMN *col = (COLUMN*)malloc(sizeof(COLUMN));
     col -> title = title;
     col -> size = 0;
     col -> max_size = 0;
-    col -> column_type; //jsp cmt faire pr cette ligne
+    col->column_type = type; //jsp cmt faire pr cette ligne
     col -> data = 0;
     col -> index = 0;
 
-    return colonne;
+    return col;
 }
 
 int insert_value(COLUMN *col, void *value)
@@ -109,7 +110,14 @@ int insert_value(COLUMN *col, void *value)
     if (col -> size == col -> max_size)
     {
         col->data = malloc(REALOC_SIZE*sizeof(int));
-        col->size += REALOC_SIZE;
+        col->max_size += REALOC_SIZE;
          
     }
+    if (col->data!=NULL)
+    {
+        col->data[col->size] = value;
+        col->size += 1;
+        return 1;
+    }
+    return 0;
 }
