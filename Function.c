@@ -107,25 +107,54 @@ COLUMN *create_column2(ENUM_TYPE type, char *title)
 
 int insert_value2(COLUMN *col, void *value)
 {
-    if (col->size == col -> max_size)
-    {
-        col->data = malloc(REALOC_SIZE*sizeof(int));
-        col->max_size += REALOC_SIZE;
-    }
-    if (col->data!=NULL)
-        {
-            col->data[col->max_size] = value;
-            col->size += 1;
-            return 1;
+    if(col->size < col->max_size){
+        switch (col->column_type) {
+            case INT:
+                col->data[col->size] = (int*) malloc((sizeof(int )));
+                *((int*)col->data[col->size])=*((int*)value);
+                break;
+            case UINT:
+                col->data[col->size] = (unsigned int*) malloc((sizeof(unsigned int)));
+                *((unsigned int*)col->data[col->size])=*((unsigned int*)value);
+                break;
+            case CHAR:
+                col->data[col->size] = (char*) malloc((sizeof(char )));
+                *((char*)col->data[col->size])=*((char*)value);
+                break;
+            case FLOAT:
+                col->data[col->size] = (float *) malloc((sizeof(float )));
+                *((float *)col->data[col->size])=*((float *)value);
+                break;
+            case DOUBLE:
+                col->data[col->size] = (double *) malloc((sizeof(double )));
+                *((double *)col->data[col->size])=*((double *)value);
+                break;
+            case STRING:
+                col->data[col->size] = (char*) malloc((sizeof(char )));
+                *((char**)col->data[col->size])=*((char**)value);
+                break;
+            case STRUCTURE:
+                col->data[col->size] = ( int*) malloc((sizeof(int)));
+                *((int*)col->data[col->size])=*((int*)value);
+                break;
         }
+        col->size++;
+        return 1;
+    }
 
     return 0;
 }
 
 void delete_column2(COLUMN **col)
 {
-    free(col->data);
-    free(col);
+    COLUMN *column = *col;
+    free(column->title);
+    for(int i=0; i<column->size; i++){
+        free(column->data[i]);
+    }
+    free(column);
+    column->size = 0;
+    column->data = NULL;
 }
 
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size)
