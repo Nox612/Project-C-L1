@@ -110,6 +110,6 @@ int insert_value(COLUMN *col, void *value)
     {
         col->data = malloc(REALOC_SIZE*sizeof(int));
         col->lSize += REALOC_SIZE;
-        //je continuerai plus tard, faut que je dors 
+         
     }
 }
