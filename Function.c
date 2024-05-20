@@ -92,7 +92,7 @@ int equal2(COLUMN *col, int value){
     return res;
 }*/
 
-COLUMN *create_column2(ENUM_TYPE type, char *title)
+COLUMN *create_column(ENUM_TYPE type, char *title)
 {
     COLUMN *col = (COLUMN*)malloc(sizeof(COLUMN));
     col -> title = title;
@@ -105,7 +105,7 @@ COLUMN *create_column2(ENUM_TYPE type, char *title)
     return col;
 }
 
-int insert_value2(COLUMN *col, void *value)
+int insert_value(COLUMN *col, void *value)
 {
     if(col->size < col->max_size){
         switch (col->column_type) {
@@ -145,7 +145,7 @@ int insert_value2(COLUMN *col, void *value)
     return 0;
 }
 
-void delete_column2(COLUMN **col)
+void delete_column(COLUMN **col)
 {
     COLUMN *column = *col;
     free(column->title);

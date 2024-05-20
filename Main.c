@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "Function.c"
+#include "Menu.c"
+
 
 int main(){
     /*
@@ -30,12 +31,15 @@ int main(){
 
     printf("%d,%d\n",col->pSize, col->lSize);
     */
-
+    /*
     COLUMN *col = create_column(CHAR, "My Col");
     char a = 'A', c = 'C';
     insert_value(col, &a);
     insert_value(col, NULL);
     insert_value(col, &c);
+     */
+
+    MenuStart();
 
     return 0;
 }

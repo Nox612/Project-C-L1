@@ -9,4 +9,4 @@ add_executable(Project_C_L1
         CDataFrame.c
         Function.c
         Header.h
-        Main.c)
+        Main.c Menu.c)
