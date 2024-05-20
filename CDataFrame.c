@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "Header.h"
 #include "malloc.h"
+#include "Function.c"
 
 CDATAFRAME *create_cdf(){
     CDATAFRAME *cdf = (CDATAFRAME*)malloc(sizeof(CDATAFRAME));
@@ -23,16 +24,16 @@ int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column){
 
 void print_cdf(CDATAFRAME *cdataframe){
     for (int i = 0; i < cdataframe->pSize; ++i) {
-        printf("%s", cdataframe->list_col[i]);
+        COLUMN *column = cdataframe->list_col[i];
+        print_col(column);
     }
 }
 
 void print_row_cdf(CDATAFRAME *cdataframe, int index){
-
     for (int i = 0; i < cdataframe->pSize; ++i) {
         COLUMN* column = cdataframe->list_col[i];
         if(column->size >= index) {
-            printf("%s", cdataframe->list_col[i][index]);
+            printf("%v",column->data[index]);
         }else{
             printf("Index out of range for column %d.\n", i);
         }
@@ -42,7 +43,8 @@ void print_row_cdf(CDATAFRAME *cdataframe, int index){
 void print_col_cdf(CDATAFRAME *cdataframe, int index){
     if(cdataframe->pSize >= index) {
         for (int i = 0; i < index; ++i) {
-            printf("%s", cdataframe->list_col[i]);
+            COLUMN *column = cdataframe->list_col[i];
+            print_col(column);
         }
     }else{
         printf("Index out of range.\n");
@@ -70,9 +72,13 @@ void add_column(CDATAFRAME *cdataframe, COLUMN* column){
     cdataframe->list_col[cdataframe->pSize] = column;
 }
 
-void delete_column(CDATAFRAME *cdataframe){
-    cdataframe->list_col[cdataframe->pSize] = NULL;
-    cdataframe->pSize--;
+void delete_column(CDATAFRAME *cdataframe, COLUMN *col){
+    for (int i = 0; i < cdataframe->pSize; ++i) {
+        if(cdataframe->list_col[i] == col){
+            COLUMN *column = cdataframe->list_col[i];
+            delete_column2(column);
+        }
+    }
 }
 
 void rename_col(CDATAFRAME *cdataframe, int index, char* name){
@@ -107,16 +113,14 @@ void name_cdf(CDATAFRAME *cdataframe){
 void display_row(CDATAFRAME *cdataframe, int index){
     COLUMN *column = cdataframe->list_col[index];
     for (int i = 0; i < column->size; ++i) {
-        printf(column->data[i]);
+        printf("%v",column->data[i]);
     }
 }
 
 void display_col(CDATAFRAME *cdataframe){
     for (int i = 0; i < cdataframe->pSize; ++i) {
         COLUMN *column = cdataframe->list_col[i];
-        for (int j = 0; j < column->size; ++j) {
-            printf("%v", column->data[j]);
-        }
+        print_col(column);
     }
 }
 
