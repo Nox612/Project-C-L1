@@ -110,31 +110,31 @@ int insert_value2(COLUMN *col, void *value)
     if(col->size < col->max_size){
         switch (col->column_type) {
             case INT:
-                col->data[col->size] = (int*) malloc((sizeof(int )));
+                col->data[col->size] = malloc((sizeof(int)));
                 *((int*)col->data[col->size])=*((int*)value);
                 break;
             case UINT:
-                col->data[col->size] = (unsigned int*) malloc((sizeof(unsigned int)));
+                col->data[col->size] = malloc((sizeof(unsigned int)));
                 *((unsigned int*)col->data[col->size])=*((unsigned int*)value);
                 break;
             case CHAR:
-                col->data[col->size] = (char*) malloc((sizeof(char )));
+                col->data[col->size] = malloc((sizeof(char )));
                 *((char*)col->data[col->size])=*((char*)value);
                 break;
             case FLOAT:
-                col->data[col->size] = (float *) malloc((sizeof(float )));
+                col->data[col->size] = malloc((sizeof(float )));
                 *((float *)col->data[col->size])=*((float *)value);
                 break;
             case DOUBLE:
-                col->data[col->size] = (double *) malloc((sizeof(double )));
+                col->data[col->size] = malloc((sizeof(double )));
                 *((double *)col->data[col->size])=*((double *)value);
                 break;
             case STRING:
-                col->data[col->size] = (char*) malloc((sizeof(char )));
+                col->data[col->size] = malloc((sizeof(char )));
                 *((char**)col->data[col->size])=*((char**)value);
                 break;
             case STRUCTURE:
-                col->data[col->size] = ( int*) malloc((sizeof(int)));
+                col->data[col->size] = malloc((sizeof(int)));
                 *((int*)col->data[col->size])=*((int*)value);
                 break;
         }
@@ -221,25 +221,61 @@ void* number_at_pos(COLUMN *col, int index){
 
 int greater(COLUMN *col, void* value){
     int res = 0;
-    for (int i = 0; i < col->size; ++i) {
-        if(col->data[i] > value){
-            res++;
-        }
+
+    switch (col->column_type) {
+        case INT:
+            for (int i = 0; i < col->size; ++i) {
+                if((*(int*)col->data[i]) > *((int*)value)){
+                    res++;
+                }
+            }
+            break;
+        case UINT:
+            for (int i = 0; i < col->size; ++i) {
+                if(*((unsigned int*)col->data[i]) > *((unsigned int*)value)){
+                    res++;
+                }
+            }
+            break;
+        case CHAR:
+            for (int i = 0; i < col->size; ++i) {
+                if(*((char*)col->data[i]) > *((char*)value)){
+                    res++;
+                }
+            }
+            break;
+        case FLOAT:
+            for (int i = 0; i < col->size; ++i) {
+                if(*((float*)col->data[i]) > *((float*)value)){
+                    res++;
+                }
+            }
+            break;
+        case DOUBLE:
+            for (int i = 0; i < col->size; ++i) {
+                if(*((double*)col->data[i]) > *((double*)value)){
+                    res++;
+                }
+            }
+            break;
+        case STRING:
+            for (int i = 0; i < col->size; ++i) {
+                if(*((char*)col->data[i]) > *((char*)value)){
+                    res++;
+                }
+            }
+            break;
+        case STRUCTURE:
+            for (int i = 0; i < col->size; ++i) {
+                if(*((int*)col->data[i]) > *((int*)value)){
+                    res++;
+                }
+            }
+            break;
     }
-    return res;
+    return -1;
 }
 
-
-
-int less(COLUMN *col, void* value){
-    int res = 0;
-    for (int i = 0; i < col->size; ++i) {
-        if(col->data[i] < value){
-            res++;
-        }
-    }
-    return res;
-}
 int equal2(COLUMN *col, void* value) {
     int res = 0;
     for (int i = 0; i < col->size; ++i) {
