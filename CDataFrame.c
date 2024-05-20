@@ -52,6 +52,71 @@ void print_col_cdf(CDATAFRAME *cdataframe, int index){
 void add_row(CDATAFRAME *cdataframe, void* value){
     for (int i = 0; i < cdataframe->pSize; ++i) {
         COLUMN* column = cdataframe->list_col[i];
-
+        column->size++;
+        column->data[column->size] = value;
     }
 }
+
+void delete_row(CDATAFRAME *cdataframe){
+    for (int i = 0; i < cdataframe->pSize; ++i) {
+        COLUMN* column = cdataframe->list_col[i];
+        column->data[column->size] = NULL;
+        column->size--;
+    }
+}
+
+void add_column(CDATAFRAME *cdataframe, COLUMN* column){
+    cdataframe->pSize++;
+    cdataframe->list_col[cdataframe->pSize] = column;
+}
+
+void delete_column(CDATAFRAME *cdataframe){
+    cdataframe->list_col[cdataframe->pSize] = NULL;
+    cdataframe->pSize--;
+}
+
+void rename_col(CDATAFRAME *cdataframe, int index, char* name){
+    COLUMN *column = cdataframe->list_col[index];
+    column->title = name;
+}
+
+int search_cdf(CDATAFRAME *cdataframe, void* value){
+    for (int i = 0; i < cdataframe->pSize; ++i) {
+        COLUMN *column = cdataframe->list_col[i];
+        for (int j = 0; j < column->size; ++j) {
+            if(column->data[j] == value){
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+void replace_cdf(CDATAFRAME *cdataframe, void* value, int row, int col){
+    COLUMN *column = cdataframe->list_col[col];
+    column->data[row] = value;
+}
+
+void name_cdf(CDATAFRAME *cdataframe){
+    for (int i = 0; i < cdataframe->pSize; ++i) {
+        COLUMN *column = cdataframe->list_col[i];
+        printf("%s", column->title);
+    }
+}
+
+void display_row(CDATAFRAME *cdataframe, int index){
+    COLUMN *column = cdataframe->list_col[index];
+    for (int i = 0; i < column->size; ++i) {
+        printf(column->data[i]);
+    }
+}
+
+void display_col(CDATAFRAME *cdataframe){
+    for (int i = 0; i < cdataframe->pSize; ++i) {
+        COLUMN *column = cdataframe->list_col[i];
+        for (int j = 0; j < column->size; ++j) {
+            printf("%v", column->data[j]);
+        }
+    }
+}
+
