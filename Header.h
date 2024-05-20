@@ -19,16 +19,6 @@ int greater(COLUMN *col, int value);
 int less(COLUMN *col, int value);
 int equal2(COLUMN *col, int value);*/
 
-/* CDataFrame Function */
-/*
-typedef struct{
-    int pSize;
-    int lSize;
-    COLUMN **list_col;
-}CDATAFRAME;
-
-CDATAFRAME *create_cdf();
-int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column);*/
 // prj part 2
 
 //  5.1
@@ -66,3 +56,13 @@ int insert_value(COLUMN *col, void *value);
 void delete_column2(COLUMN **col);
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void print_col(COLUMN* col);
+
+/* CDataFrame Function */
+typedef struct{
+    int pSize;
+    int lSize;
+    COLUMN **list_col;
+}CDATAFRAME;
+
+CDATAFRAME *create_cdf();
+int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column);

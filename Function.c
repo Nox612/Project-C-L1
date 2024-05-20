@@ -197,3 +197,56 @@ void print_col(COLUMN* col){
     }
 }
 
+
+int number_of_occurences(COLUMN *col, void* value){
+    int res = 0;
+    for (int i = 0; i < col->size; ++i) {
+        if(col->data[i] == value){
+            res++;
+        }
+    }
+    return res;
+}
+
+
+void* number_at_pos(COLUMN *col, int index){
+    if(index>col->size){
+        return NULL;
+    }else{
+        return col->data[index];
+    }
+}
+
+
+
+int greater(COLUMN *col, void* value){
+    int res = 0;
+    for (int i = 0; i < col->size; ++i) {
+        if(col->data[i] > value){
+            res++;
+        }
+    }
+    return res;
+}
+
+
+
+int less(COLUMN *col, void* value){
+    int res = 0;
+    for (int i = 0; i < col->size; ++i) {
+        if(col->data[i] < value){
+            res++;
+        }
+    }
+    return res;
+}
+int equal2(COLUMN *col, void* value) {
+    int res = 0;
+    for (int i = 0; i < col->size; ++i) {
+        if (col->data[i] == value) {
+            res++;
+        }
+    }
+    return res;
+}
+
