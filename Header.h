@@ -57,12 +57,3 @@ void delete_column2(COLUMN **col);
 void convert_value(COLUMN *col, unsigned long long int i, char *str, int size);
 void print_col(COLUMN* col);
 
-/* CDataFrame Function */
-typedef struct{
-    int pSize;
-    int lSize;
-    COLUMN **list_col;
-}CDATAFRAME;
-
-CDATAFRAME *create_cdf();
-int fill_cdf(CDATAFRAME *cdataframe, COLUMN *column);

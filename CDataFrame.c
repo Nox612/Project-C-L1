@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "Header.h"
+#include "CDataFrame.h"
 #include "malloc.h"
 #include "Function.c"
 
@@ -33,7 +33,7 @@ void print_row_cdf(CDATAFRAME *cdataframe, int index){
     for (int i = 0; i < cdataframe->pSize; ++i) {
         COLUMN* column = cdataframe->list_col[i];
         if(column->size >= index) {
-            printf("%v",column->data[index]);
+            printf("%s",column->data[index]);
         }else{
             printf("Index out of range for column %d.\n", i);
         }
@@ -76,7 +76,7 @@ void delete_column(CDATAFRAME *cdataframe, COLUMN *col){
     for (int i = 0; i < cdataframe->pSize; ++i) {
         if(cdataframe->list_col[i] == col){
             COLUMN *column = cdataframe->list_col[i];
-            delete_column2(column);
+            delete_column2(&column);
         }
     }
 }
@@ -113,7 +113,7 @@ void name_cdf(CDATAFRAME *cdataframe){
 void display_row(CDATAFRAME *cdataframe, int index){
     COLUMN *column = cdataframe->list_col[index];
     for (int i = 0; i < column->size; ++i) {
-        printf("%v",column->data[i]);
+        printf("%s",column->data[i]);
     }
 }
 
